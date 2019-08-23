@@ -109,7 +109,7 @@ void AddControls(HWND hWnd) {
 	CreateWindowW(L"static", L"TEMPERATURE CONVERTER", WS_VISIBLE | WS_CHILD | WS_BORDER | SS_CENTER, 17, 50, 200, 20, hWnd, NULL, NULL, NULL);
 
 	CreateWindowW(L"static", L"Enter Temperature Here: ", WS_VISIBLE | WS_CHILD | SS_CENTER, 17, 100, 200, 20, hWnd, NULL, NULL, NULL);
-	hTemperature = CreateWindowW(L"edit", L"", WS_VISIBLE | WS_CHILD | WS_BORDER, 90, 125, 50, 20, hWnd, NULL, NULL, NULL);
+	hTemperature = CreateWindowW(L"edit", L"", WS_VISIBLE | WS_CHILD | WS_BORDER | ES_NUMBER, 90, 125, 50, 20, hWnd, NULL, NULL, NULL);
 
 	hCtoFButton = CreateWindowW(L"button", L"Celsius to Fahrenheit", WS_VISIBLE | WS_CHILD | BS_AUTORADIOBUTTON, 17, 160, 200, 20, hWnd, (HMENU)C_TO_F, NULL, NULL);
 	SendMessage(hCtoFButton, BM_SETCHECK, BST_CHECKED, 1);
