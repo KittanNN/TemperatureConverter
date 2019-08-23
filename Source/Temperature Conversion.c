@@ -16,7 +16,7 @@ void AddControls(HWND);
 float TemperatureConversionCtoF(float temperature);
 float TemperatureConversionFtoC(float temperature);
 int IntToStr(int x, char str[], int d);
-void ftoa(float n, char *res, int afterpoint);
+void FloatToString(float n, char *res, int afterpoint);
 void Reverse(char *str, int len);
 
 HMENU hMenu;
@@ -62,10 +62,11 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 			break;
 		case CONVERT_BUTTON:
 		{
-			char temperature[20];
-			char resultTemperature[20];
+			char temperature[16];
+			char resultTemperature[16];
 			float resultingTemp;
-			GetWindowTextA(hTemperature, temperature, 20);
+
+			GetWindowTextA(hTemperature, temperature, 16);
 			float enteredTemperature = strtof(temperature, NULL);
 
 			if(Button_GetCheck(hCtoFButton) != 0)
@@ -73,7 +74,7 @@ LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 			else if(Button_GetCheck(hFtoCButton) != 0)
 				resultingTemp = TemperatureConversionFtoC(enteredTemperature);
 			
-			ftoa(resultingTemp, resultTemperature, 1);
+			FloatToString(resultingTemp, resultTemperature, 1);
 
 			SetWindowTextA(hOut, resultTemperature);
 		}
@@ -123,7 +124,7 @@ void AddControls(HWND hWnd) {
 
 float TemperatureConversionCtoF(float temperature){
 	
-	float result;
+	float result = 0;
 
 	result = (temperature * (9.0/5.0)) + 32;
 
@@ -132,7 +133,7 @@ float TemperatureConversionCtoF(float temperature){
 
 float TemperatureConversionFtoC(float temperature) {
 
-	float result;
+	float result = 0;
 
 	result = (temperature - 32) * (5.0 / 9.0);
 
@@ -156,7 +157,7 @@ int IntToStr(int x, char str[], int d) {
 	return i;
 }
 
-void ftoa(float n, char *res, int afterpoint) {
+void FloatToString(float n, char *res, int afterpoint) {
 	int ipart = (int)n;
 
 	float fpart = n - (float)ipart;
